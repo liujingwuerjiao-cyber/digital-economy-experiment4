@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="280" viewBox="0 0 1300 280">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1f2937"/>
+    </marker>
+    <style>
+      .box { fill: #f5f7fb; stroke: #334155; stroke-width: 2; rx: 8; ry: 8; }
+      .text { fill: #0f172a; font-family: Arial, sans-serif; font-size: 15px; text-anchor: middle; dominant-baseline: middle; }
+      .line { stroke: #1f2937; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .title { fill: #111827; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; }
+    </style>
+  </defs>
+
+  <text x="20" y="26" class="title">Auction Simulation Flowchart (Equivalent to Mermaid Logic)</text>
+
+  <rect class="box" x="20" y="90" width="130" height="60"/>
+  <text class="text" x="85" y="120">Start</text>
+
+  <rect class="box" x="180" y="90" width="150" height="60"/>
+  <text class="text" x="255" y="120">Draw Quality Q</text>
+
+  <rect class="box" x="360" y="90" width="210" height="60"/>
+  <text class="text" x="465" y="120">Generate Vi = Q + eps_i</text>
+
+  <rect class="box" x="600" y="90" width="170" height="60"/>
+  <text class="text" x="685" y="120">Bid_i = Vi</text>
+
+  <rect class="box" x="800" y="90" width="180" height="60"/>
+  <text class="text" x="890" y="120">Find top-1 and top-2</text>
+
+  <rect class="box" x="1010" y="90" width="170" height="60"/>
+  <text class="text" x="1095" y="120">Winner pays 2nd bid</text>
+
+  <rect class="box" x="1190" y="90" width="90" height="60"/>
+  <text class="text" x="1235" y="120">End</text>
+
+  <path class="line" d="M150 120 L180 120"/>
+  <path class="line" d="M330 120 L360 120"/>
+  <path class="line" d="M570 120 L600 120"/>
+  <path class="line" d="M770 120 L800 120"/>
+  <path class="line" d="M980 120 L1010 120"/>
+  <path class="line" d="M1180 120 L1190 120"/>
+
+  <text x="650" y="205" class="text" style="font-size:14px;">
+    Record Price, Win, and Overbid for each bidder row
+  </text>
+</svg>

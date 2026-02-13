@@ -1,0 +1,39 @@
+Second-Price Sealed-Bid Auction Simulation Report
+Generated at: 2026-02-13T10:10:01
+
+Execution Summary
+- Mechanism: Highest bidder wins, pays second highest bid.
+- Bidding rule: truthful bidding (Bid = Valuation).
+- Parameters: seed=42, auctions=100, bidders=4
+- Quality: Uniform[0.0, 100.0]
+- Scenarios (sigma): 1:10, 2:30
+- Reserve price: 0.0
+- Total output rows: 800
+
+Antigravity Demo
+- Requested: True
+- Success: True
+- intercepted open: https://xkcd.com/353/
+
+OLS Regression (Price on Quality) with HC1 robust standard errors
+   _cons  coef=1.641023  robust_se=1.480736  t=1.1082  p=0.267755
+ Quality  coef=0.251558  robust_se=0.036666  t=6.8608  p=0.000000
+
+Winner's Curse (Overbid) by Scenario
+scenario 1: n=400, mean=2.7805, std=5.7921, median=0.0000, min=0.0000, max=23.1600
+scenario 2: n=400, mean=7.7933, std=16.9026, median=0.0000, min=0.0000, max=90.4100
+
+Deliverables
+- simulate_auction.py
+- data_exp4_auction.csv
+- regression_results.csv
+- overbid_summary.csv
+- run_summary.txt
+- analysis.do
+- analysis.prg
+- auction_flowchart.svg
+- regression_results.png
+- scenario_bar.png
+- scenario_box.png
+- report.txt
+- report.pdf

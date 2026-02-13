@@ -1,0 +1,93 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      18.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2023 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-STATA-PC        https://www.stata.com
+                                   979-696-4600        stata@stata.com
+
+Stata license: Single-user 2-core , expiring 18 Feb 2027
+Serial number: 501809418514
+  Licensed to: liujingwuerjiao
+               liujingwuerjiao
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+. do analysis.do 
+
+. clear all
+
+. set more off
+
+. 
+. import delimited "data_exp4_auction.csv", clear varnames(1) numericcols(_all)
+(encoding automatically selected: ISO-8859-1)
+(9 vars, 800 obs)
+
+. 
+. * Verify Overbid definition for winners only
+. gen overbid_check = cond(win==1, max(bid-quality, 0), 0)
+
+. 
+. * OLS with heteroskedasticity-robust SE
+. reg price quality, robust
+
+Linear regression                               Number of obs     =        800
+                                                F(1, 798)         =      47.07
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0536
+                                                Root MSE          =      30.44
+
+------------------------------------------------------------------------------
+             |               Robust
+       price | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     quality |   .2515578   .0366657     6.86   0.000     .1795852    .3235305
+       _cons |   1.641023   1.480736     1.11   0.268    -1.265575    4.547621
+------------------------------------------------------------------------------
+
+. 
+. * Scenario comparison for Winner's Curse metric
+. ttest overbid, by(scenario)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+       1 |     400     2.78055     .289607     5.79214    2.211204    3.349896
+       2 |     400    7.793275    .8451298     16.9026    6.131811    9.454739
+---------+--------------------------------------------------------------------
+Combined |     800    5.286913    .4551281    12.87297    4.393525      6.1803
+---------+--------------------------------------------------------------------
+    diff |           -5.012725    .8933737               -6.766365   -3.259085
+------------------------------------------------------------------------------
+    diff = mean(1) - mean(2)                                      t =  -5.6110
+H0: diff = 0                                     Degrees of freedom =      798
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. 
+. * Graphs
+. graph box overbid, over(scenario) name(g_box, replace)
+
+. graph export "scenario_box.png", name(g_box) replace
+file scenario_box.png written in PNG format
+
+. 
+. graph bar (mean) overbid, over(scenario) blabel(bar) name(g_bar, replace)
+
+. graph export "scenario_bar.png", name(g_bar) replace
+file scenario_bar.png written in PNG format
+
+. 
+end of do-file
